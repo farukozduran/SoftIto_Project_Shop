@@ -14,14 +14,14 @@ namespace Project.Shop.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var result = context.Categories.ToList();
+            return View(result);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            var result = context.Categories.ToList();
-            return View(result);
+            return View();
         }
 
         [HttpPost]
