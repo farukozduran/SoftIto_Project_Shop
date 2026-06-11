@@ -7,5 +7,6 @@ namespace Project.Shop.Models
         [Key]
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }

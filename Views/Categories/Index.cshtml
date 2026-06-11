@@ -3,29 +3,25 @@
 <p>
     <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
-
-<table class="table">
-
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.CategoryName)</th>
-        </tr>
-    </thead>
-
-    <tbody>
+<section class="py-5">
+    
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        
+    
         @foreach (var item in Model)
         {
             <div class="col mb-5">
                 <div class="card h-100">
                     <!-- Product image-->
-                    <img class="card-img-top" src="https://thumbs.dreamstime.com/b/electronics-technology-line-art-thin-icons-set-computer-gadgets-vector-77815976.jpg" alt="..." />
+                    <img class="card-img-top" src="@Html.DisplayFor(modelItem => item.ImageUrl)" alt="..." />
                     <!-- Product details-->
                     <div class="card-body p-4">
                         <div class="text-center">
                             <!-- Category name-->
                             <h5 class="fw-bolder">@Html.DisplayFor(modelItem => item.CategoryName)</h5>
                             <!-- Motto-->
-                            Teknolojinin en yeni ürünleri burada.
+                            <p class="text-muted">@Html.DisplayFor(modelItem => item.Tagline)</p>
                         </div>
                     </div>
                     <!-- Product actions-->
@@ -36,14 +32,9 @@
                     </div>
                 </div>
             </div>
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.CategoryId" class="btn btn-success">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@item.CategoryId" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
+            }
+        </div>
+        
+    </div>
+</section>
 
-</table>

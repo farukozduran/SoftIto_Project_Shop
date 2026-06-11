@@ -7,5 +7,7 @@ namespace Project.Shop.Models
         [Key]
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
+        public string? ImageUrl { get; set; }
+        public string? Tagline { get; set; }
     }
 }
