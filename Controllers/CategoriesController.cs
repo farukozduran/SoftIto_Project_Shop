@@ -12,9 +12,19 @@ namespace Project.Shop.Controllers
             this.context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string search, bool isAdmin = false)
         {
-            var result = context.Categories.ToList();
+            var result = context.Categories.AsQueryable();
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                result = result.Where(x =>
+                x.CategoryName.Contains(search)
+                );
+            }
+
+            ViewData["IsAdmin"] = isAdmin;
+            ViewData["CurrentSearch"] = search;
             return View(result);
         }
 

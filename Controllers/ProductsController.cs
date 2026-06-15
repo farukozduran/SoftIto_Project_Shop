@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Project.Shop.Models;
 
 namespace Project.Shop.Controllers
@@ -13,10 +14,27 @@ namespace Project.Shop.Controllers
             this.context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string search, int? categoryId, bool isAdmin = false)
         {
-            var result = context.Products.ToList();
-            return View(result);
+            var result = context.Products.Include(p => p.Category).AsQueryable();
+
+            if(categoryId != null)
+            {
+                result = result.Where(x => x.CategoryId == categoryId);
+
+                var category = context.Categories.Find(categoryId);
+                ViewData["CategoryName"] = category?.CategoryName;
+            }
+
+            if (!string.IsNullOrEmpty(search))
+            {
+                result = result.Where(x => x.ProductName.Contains(search));
+            }
+
+            ViewData["IsAdmin"] = isAdmin;
+            ViewData["CurrentSearch"] = search;
+            ViewData["CurrentCategoryId"] = categoryId;
+            return View(result.ToList());
         }
 
         [HttpGet]
