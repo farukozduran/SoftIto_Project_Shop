@@ -29,7 +29,7 @@ namespace Project.Shop.Controllers
         {
             context.Categories.Add(category);
             context.SaveChanges();
-            return RedirectToAction("Create");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
